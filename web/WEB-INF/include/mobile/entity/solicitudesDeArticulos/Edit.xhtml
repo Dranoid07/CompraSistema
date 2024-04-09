@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="SolicitudesDeArticulosEditPage" lazy="true">
+        <pm:header title="#{myBundle.EditSolicitudesDeArticulosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:SolicitudesDeArticulosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="SolicitudesDeArticulosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{solicitudesDeArticulosController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_id}" for="id" />
+                            <h:outputText id="id" value="#{solicitudesDeArticulosController.selected.id}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_fechaSolicitud}" for="fechaSolicitud" />
+                            <p:calendar id="fechaSolicitud" pattern="MM/dd/yyyy" value="#{solicitudesDeArticulosController.selected.fechaSolicitud}" title="#{myBundle.EditSolicitudesDeArticulosTitle_fechaSolicitud}"  showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_cantidad}" for="cantidad" />
+                            <p:inputText id="cantidad" value="#{solicitudesDeArticulosController.selected.cantidad}" title="#{myBundle.EditSolicitudesDeArticulosTitle_cantidad}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_estado}" for="estado" />
+                            <p:inputText id="estado" value="#{solicitudesDeArticulosController.selected.estado}" title="#{myBundle.EditSolicitudesDeArticulosTitle_estado}" size="20" maxlength="20"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_articuloId}" for="articuloId" />
+                            <p:selectOneMenu id="articuloId" value="#{solicitudesDeArticulosController.selected.articuloId}"  converter="articulosConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{articulosController.items}"
+                                               var="articuloIdItem"
+                                               itemValue="#{articuloIdItem}"
+                                               itemLabel="#{articuloIdItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_empleadoSolicitante}" for="empleadoSolicitante" />
+                            <p:selectOneMenu id="empleadoSolicitante" value="#{solicitudesDeArticulosController.selected.empleadoSolicitante}"  converter="empleadosConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{empleadosController.items}"
+                                               var="empleadoSolicitanteItem"
+                                               itemValue="#{empleadoSolicitanteItem}"
+                                               itemLabel="#{empleadoSolicitanteItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_unidadDeMedidaId}" for="unidadDeMedidaId" />
+                            <p:selectOneMenu id="unidadDeMedidaId" value="#{solicitudesDeArticulosController.selected.unidadDeMedidaId}"  converter="unidadesDeMedidaConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{unidadesDeMedidaController.items}"
+                                               var="unidadDeMedidaIdItem"
+                                               itemValue="#{unidadDeMedidaIdItem}"
+                                               itemLabel="#{unidadDeMedidaIdItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{solicitudesDeArticulosController.save}" value="#{myBundle.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:SolicitudesDeArticulosListPage:SolicitudesDeArticulosListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:SolicitudesDeArticulosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

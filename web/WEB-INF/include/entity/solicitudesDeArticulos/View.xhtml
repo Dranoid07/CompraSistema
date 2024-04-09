@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SolicitudesDeArticulosViewDlg" widgetVar="SolicitudesDeArticulosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewSolicitudesDeArticulosTitle}" closeOnEscape="true">
+
+            <h:form id="SolicitudesDeArticulosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{solicitudesDeArticulosController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewSolicitudesDeArticulosLabel_id}"/>
+                        <h:outputText value="#{solicitudesDeArticulosController.selected.id}" title="#{myBundle.ViewSolicitudesDeArticulosTitle_id}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolicitudesDeArticulosLabel_fechaSolicitud}"/>
+                        <h:outputText value="#{solicitudesDeArticulosController.selected.fechaSolicitud}" title="#{myBundle.ViewSolicitudesDeArticulosTitle_fechaSolicitud}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewSolicitudesDeArticulosLabel_cantidad}"/>
+                        <h:outputText value="#{solicitudesDeArticulosController.selected.cantidad}" title="#{myBundle.ViewSolicitudesDeArticulosTitle_cantidad}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolicitudesDeArticulosLabel_estado}"/>
+                        <h:outputText value="#{solicitudesDeArticulosController.selected.estado}" title="#{myBundle.ViewSolicitudesDeArticulosTitle_estado}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolicitudesDeArticulosLabel_articuloId}"/>
+                        <h:outputText value="#{solicitudesDeArticulosController.selected.articuloId.descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolicitudesDeArticulosLabel_empleadoSolicitante}"/>
+                        <h:outputText value="#{solicitudesDeArticulosController.selected.empleadoSolicitante.descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewSolicitudesDeArticulosLabel_unidadDeMedidaId}"/>
+                        <h:outputText value="#{solicitudesDeArticulosController.selected.unidadDeMedidaId.descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('SolicitudesDeArticulosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

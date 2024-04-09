@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="EmpleadosCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateEmpleadosTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:EmpleadosListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="EmpleadosCreateForm">
+
+                <h:panelGroup id="display" rendered="#{empleadosController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_cedula}" for="cedula" />
+                            <p:inputText id="cedula" value="#{empleadosController.selected.cedula}" title="#{myBundle.CreateEmpleadosTitle_cedula}" size="20" maxlength="20"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_descripcion}" for="descripcion" />
+                            <p:inputText id="descripcion" value="#{empleadosController.selected.descripcion}" title="#{myBundle.CreateEmpleadosTitle_descripcion}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_estado}" for="estado" />
+                            <p:inputText id="estado" value="#{empleadosController.selected.estado}" title="#{myBundle.CreateEmpleadosTitle_estado}" size="20" maxlength="20"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_departamentoId}" for="departamentoId" />
+                            <p:selectOneMenu id="departamentoId" value="#{empleadosController.selected.departamentoId}"  converter="departamentosConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{departamentosController.items}"
+                                               var="departamentoIdItem"
+                                               itemValue="#{departamentoIdItem}"
+                                               itemLabel="#{departamentoIdItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{empleadosController.saveNew}" value="#{myBundle.Save}" update="display,:EmpleadosListPage:EmpleadosListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:EmpleadosListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

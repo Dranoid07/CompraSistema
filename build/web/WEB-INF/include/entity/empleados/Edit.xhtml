@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="EmpleadosEditDlg" widgetVar="EmpleadosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditEmpleadosTitle}" closeOnEscape="true">
+
+            <h:form id="EmpleadosEditForm">
+
+                <h:panelGroup id="display">
+                       <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_cedula}" for="cedula" />
+                        <p:inputText id="cedula" value="#{empleadosController.selected.cedula}" title="#{myBundle.CreateEmpleadosTitle_cedula}" size="50" maxlength="50"  placeholder="402-0868331-4" required="true">
+                            <f:validator validatorId="com.jp.CedulaValidator"/>
+                        </p:inputText>
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{empleadosController.selected.descripcion}" title="#{myBundle.CreateEmpleadosTitle_descripcion}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_estado}" for="estado" />
+                        <p:selectOneRadio id="estado" value="#{empleadosController.selected.estado}" required="true">
+                            <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        </p:selectOneRadio>
+
+                        <p:outputLabel value="#{myBundle.CreateEmpleadosLabel_departamentoId}" for="departamentoId" />
+                        <p:selectOneMenu id="departamentoId" value="#{empleadosController.selected.departamentoId}"  converter="departamentosConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentosController.items}"
+                                           var="departamentoIdItem"
+                                           itemValue="#{departamentoIdItem}"
+                                           itemLabel="#{departamentoIdItem.descripcion.toString()}"
+                                           />
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{empleadosController.save}" value="#{myBundle.Save}" update="display,:EmpleadosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EmpleadosEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('EmpleadosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

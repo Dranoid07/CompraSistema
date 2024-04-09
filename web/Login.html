@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta charset="UTF-8">
+    <title>Inicio de sesión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        form {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4caf50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+        }
+        th {
+            text-align: right;
+            padding-right: 10px;
+        }
+        td {
+            text-align: left;
+        }
+        th, td {
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <form action="LoginServlet" method="post">
+            <table>
+                <tr>
+                    <th>UserName:</th>
+                    <td><input type="text" name="username"/></td>
+                </tr>
+                <tr>
+                    <th>Password:</th>
+                    <td><input type="password" name="password"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Login"/></td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</body>
+</html>

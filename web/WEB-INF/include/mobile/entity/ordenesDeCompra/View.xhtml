@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="OrdenesDeCompraViewPage" lazy="true">
+        <pm:header title="#{myBundle.ViewOrdenesDeCompraTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:OrdenesDeCompraListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="OrdenesDeCompraViewForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{ordenesDeCompraController.selected != null}">
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_numeroOrden}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.numeroOrden}" title="#{myBundle.ViewOrdenesDeCompraTitle_numeroOrden}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_fechaOrden}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.fechaOrden}" title="#{myBundle.ViewOrdenesDeCompraTitle_fechaOrden}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_estado}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.estado}" title="#{myBundle.ViewOrdenesDeCompraTitle_estado}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_cantidad}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.cantidad}" title="#{myBundle.ViewOrdenesDeCompraTitle_cantidad}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_costoUnitario}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.costoUnitario}" title="#{myBundle.ViewOrdenesDeCompraTitle_costoUnitario}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_articuloId}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.articuloId.descripcion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_marcaId}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.marcaId.descripcion}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_solicitudId}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.solicitudId.id}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_unidadDeMedidaId}"/>
+                            <h:outputText value="#{ordenesDeCompraController.selected.unidadDeMedidaId.descripcion}"/>
+                        </pm:field>
+                    </p:outputPanel>
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

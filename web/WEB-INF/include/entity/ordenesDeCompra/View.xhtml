@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenesDeCompraViewDlg" widgetVar="OrdenesDeCompraViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewOrdenesDeCompraTitle}" closeOnEscape="true">
+
+            <h:form id="OrdenesDeCompraViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{ordenesDeCompraController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_numeroOrden}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.numeroOrden}" title="#{myBundle.ViewOrdenesDeCompraTitle_numeroOrden}"/>
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_fechaOrden}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.fechaOrden}" title="#{myBundle.ViewOrdenesDeCompraTitle_fechaOrden}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_estado}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.estado}" title="#{myBundle.ViewOrdenesDeCompraTitle_estado}"/>
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_cantidad}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.cantidad}" title="#{myBundle.ViewOrdenesDeCompraTitle_cantidad}"/>
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_costoUnitario}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.costoUnitario}" title="#{myBundle.ViewOrdenesDeCompraTitle_costoUnitario}"/>
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_articuloId}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.articuloId.descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_marcaId}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.marcaId.descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_solicitudId}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.solicitudId.id}"/>
+
+                        <h:outputText value="#{myBundle.ViewOrdenesDeCompraLabel_unidadDeMedidaId}"/>
+                        <h:outputText value="#{ordenesDeCompraController.selected.unidadDeMedidaId.descripcion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('OrdenesDeCompraViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

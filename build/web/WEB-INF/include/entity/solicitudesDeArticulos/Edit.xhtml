@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="SolicitudesDeArticulosEditDlg" widgetVar="SolicitudesDeArticulosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditSolicitudesDeArticulosTitle}" closeOnEscape="true">
+
+            <h:form id="SolicitudesDeArticulosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{solicitudesDeArticulosController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_id}" for="id" />
+                        <h:outputText id="id" value="#{solicitudesDeArticulosController.selected.id}" />
+
+                        <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_fechaSolicitud}" for="fechaSolicitud" />
+                        <p:calendar id="fechaSolicitud" pattern="MM/dd/yyyy" value="#{solicitudesDeArticulosController.selected.fechaSolicitud}" title="#{myBundle.EditSolicitudesDeArticulosTitle_fechaSolicitud}"  showOn="button"/>
+
+                        <p:outputLabel value="#{myBundle.CreateSolicitudesDeArticulosLabel_cantidad}" for="cantidad" />
+<p:inputText id="cantidad" value="#{solicitudesDeArticulosController.selected.cantidad}" title="#{myBundle.CreateSolicitudesDeArticulosTitle_cantidad}">
+    <f:validator validatorId="com.jp.CantidadValidator" />
+</p:inputText>
+<p:message for="cantidad" />
+
+                        <p:outputLabel value="#{myBundle.CreateSolicitudesDeArticulosLabel_estado}" for="estado" />
+<p:selectOneRadio id="estado" value="#{solicitudesDeArticulosController.selected.estado}" layout="lineDirection">
+      <f:selectItem itemLabel="Pendiente" itemValue="Pendiente" />
+    <f:selectItem itemLabel="Aprobada" itemValue="Aprobada" />
+    <f:selectItem itemLabel="Rechazada" itemValue="Rechazada" />
+</p:selectOneRadio>
+
+
+                        <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_articuloId}" for="articuloId" />
+                        <p:selectOneMenu id="articuloId" value="#{solicitudesDeArticulosController.selected.articuloId}"  converter="articulosConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{articulosController.items}"
+                                           var="articuloIdItem"
+                                           itemValue="#{articuloIdItem}"
+                                           itemLabel="#{articuloIdItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_empleadoSolicitante}" for="empleadoSolicitante" />
+                        <p:selectOneMenu id="empleadoSolicitante" value="#{solicitudesDeArticulosController.selected.empleadoSolicitante}"  converter="empleadosConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{empleadosController.items}"
+                                           var="empleadoSolicitanteItem"
+                                           itemValue="#{empleadoSolicitanteItem}"
+                                           itemLabel="#{empleadoSolicitanteItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{myBundle.EditSolicitudesDeArticulosLabel_unidadDeMedidaId}" for="unidadDeMedidaId" />
+                        <p:selectOneMenu id="unidadDeMedidaId" value="#{solicitudesDeArticulosController.selected.unidadDeMedidaId}"  converter="unidadesDeMedidaConverter">
+                            <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{unidadesDeMedidaController.items}"
+                                           var="unidadDeMedidaIdItem"
+                                           itemValue="#{unidadDeMedidaIdItem}"
+                                           itemLabel="#{unidadDeMedidaIdItem.descripcion.toString()}"
+                                           />
+
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{solicitudesDeArticulosController.save}" value="#{myBundle.Save}" update="display,:SolicitudesDeArticulosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('SolicitudesDeArticulosEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('SolicitudesDeArticulosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/glassfish-resources.xml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/empleados/List.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/ordenesDeCompra/Edit.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/departamentos/Create.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/empleados/Create.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/src/java/com/facade/ArticulosFacade.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/articulos/List.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/src/java/com/jp/validators/ExistenciaValidator.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/src/java/com/jp/validators/CantidadValidator.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/proveedores/Create.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/unidadesDeMedida/List.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/src/java/com/jp/validators/CedulaValidator.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/articulos/View.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/solicitudesDeArticulos/List.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/solicitudesDeArticulos/Create.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/ordenesDeCompra/List.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/proveedores/Edit.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/articulos/Create.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/articulos/Edit.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/solicitudesDeArticulos/Edit.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/src/java/com/entity/Articulos.java</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/marcas/List.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/src/java/MyBundle.properties</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/solicitudesDeArticulos/View.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/proveedores/List.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/departamentos/List.xhtml</file>
+            <file>file:/C:/Users/migue/OneDrive/Documentos/NetBeansProjects/WebApplication3/web/WEB-INF/include/entity/ordenesDeCompra/Create.xhtml</file>
+        </group>
+    </open-files>
+</project-private>

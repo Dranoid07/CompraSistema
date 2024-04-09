@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="SolicitudesDeArticulosListForm">
+
+        <p:panel header="#{myBundle.ListSolicitudesDeArticulosTitle}">
+            <p:contextMenu id="SolicitudesDeArticulosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('SolicitudesDeArticulosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('SolicitudesDeArticulosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('SolicitudesDeArticulosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('SolicitudesDeArticulosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.SolicitudesDeArticulosMenuItem_ordenesDeCompraCollection}" icon="ui-icon-search"  action="#{solicitudesDeArticulosController.navigateOrdenesDeCompraCollection}" disabled="#{solicitudesDeArticulosController.isOrdenesDeCompraCollectionEmpty}" ajax="false"/>  
+                <p:menuitem value="#{myBundle.SolicitudesDeArticulosMenuItem_articuloId}" icon="ui-icon-search"  actionListener="#{solicitudesDeArticulosController.prepareArticuloId}" update=":ArticulosViewForm" oncomplete="PF('ArticulosViewDialog').show()" disabled="#{empty solicitudesDeArticulosController.selected.articuloId}"/>  
+                <p:menuitem value="#{myBundle.SolicitudesDeArticulosMenuItem_empleadoSolicitante}" icon="ui-icon-search"  actionListener="#{solicitudesDeArticulosController.prepareEmpleadoSolicitante}" update=":EmpleadosViewForm" oncomplete="PF('EmpleadosViewDialog').show()" disabled="#{empty solicitudesDeArticulosController.selected.empleadoSolicitante}"/>  
+                <p:menuitem value="#{myBundle.SolicitudesDeArticulosMenuItem_unidadDeMedidaId}" icon="ui-icon-search"  actionListener="#{solicitudesDeArticulosController.prepareUnidadDeMedidaId}" update=":UnidadesDeMedidaViewForm" oncomplete="PF('UnidadesDeMedidaViewDialog').show()" disabled="#{empty solicitudesDeArticulosController.selected.unidadDeMedidaId}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{solicitudesDeArticulosController.items}"
+                         lazy="false"
+                         rowKey="#{item.id}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{solicitudesDeArticulosController.selected}"
+                         filteredValue="#{solicitudesDeArticulosController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{solicitudesDeArticulosController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.id}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolicitudesDeArticulosDataTableContextMenu" listener="#{solicitudesDeArticulosController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:SolicitudesDeArticulosDataTableContextMenu" listener="#{solicitudesDeArticulosController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{solicitudesDeArticulosController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('SolicitudesDeArticulosListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.id}" filterBy="#{item.id}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolicitudesDeArticulosTitle_id}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaSolicitud}" filterBy="#{item.fechaSolicitud}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolicitudesDeArticulosTitle_fechaSolicitud}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaSolicitud}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.cantidad}" filterBy="#{item.cantidad}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolicitudesDeArticulosTitle_cantidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidad}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolicitudesDeArticulosTitle_estado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.articuloId.descripcion}" filterBy="#{item.articuloId.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolicitudesDeArticulosTitle_articuloId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.articuloId.descripcion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.empleadoSolicitante.descripcion}" filterBy="#{item.empleadoSolicitante.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListSolicitudesDeArticulosTitle_empleadoSolicitante}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.empleadoSolicitante.descripcion}"/>
+                </p:column>
+
+               
+                    <p:column sortBy="#{item.unidadDeMedidaId.descripcion}" filterBy="#{item.unidadDeMedidaId.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListSolicitudesDeArticulosTitle_unidadDeMedidaId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.unidadDeMedidaId.descripcion}"/>
+                    </p:column>
+             
+
+            </p:dataTable>
+            
+                <h3>Exporta los datos visibles en la tabla</h3>
+            <h:commandLink>
+                <p:graphicImage name="/img/Excel.jpg" height="32px" width="32px"/>
+                <p:dataExporter type="xls" target="datalist" fileName="Solicitudes De Articulos" pageOnly="true"/>
+            </h:commandLink>
+            
+            <h:commandLink>
+                <p:graphicImage name="/img/Pdf.jpg" width="32px" height="32px"/>
+                <p:dataExporter type="pdf" target="datalist" fileName="Solicitudes De Articulos" pageOnly="true" />
+            </h:commandLink>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{solicitudesDeArticulosController.prepareCreate}" update=":SolicitudesDeArticulosCreateForm" oncomplete="PF('SolicitudesDeArticulosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}" update=":SolicitudesDeArticulosViewForm" oncomplete="PF('SolicitudesDeArticulosViewDialog').show()" disabled="#{empty solicitudesDeArticulosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":SolicitudesDeArticulosEditForm" oncomplete="PF('SolicitudesDeArticulosEditDialog').show()" disabled="#{empty solicitudesDeArticulosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{solicitudesDeArticulosController.delete}" update=":growl,datalist" disabled="#{empty solicitudesDeArticulosController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

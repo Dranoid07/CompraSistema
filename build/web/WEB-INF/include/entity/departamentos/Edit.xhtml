@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="DepartamentosEditDlg" widgetVar="DepartamentosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.EditDepartamentosTitle}" closeOnEscape="true">
+
+            <h:form id="DepartamentosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{departamentosController.selected != null}">
+
+
+                        <h:outputLabel value="#{myBundle.EditDepartamentosLabel_id}" for="id" />
+                        <h:outputText id="id" value="#{departamentosController.selected.id}" />
+
+                        <p:outputLabel value="#{myBundle.EditDepartamentosLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{departamentosController.selected.descripcion}" title="#{myBundle.EditDepartamentosTitle_descripcion}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{myBundle.CreateDepartamentosLabel_estado}" for="estado" />
+                       <p:selectOneRadio id="estado" value="#{departamentosController.selected.estado}" layout="lineDirection" required="true">
+            <f:selectItem itemLabel="Activo" itemValue="Activo" />
+    <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+</p:selectOneRadio>   
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{departamentosController.save}" value="#{myBundle.Save}" update="display,:DepartamentosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('DepartamentosEditDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('DepartamentosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

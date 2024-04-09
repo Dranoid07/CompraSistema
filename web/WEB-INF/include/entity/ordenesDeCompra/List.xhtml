@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="OrdenesDeCompraListForm">
+
+        <p:panel header="#{myBundle.ListOrdenesDeCompraTitle}">
+            <p:contextMenu id="OrdenesDeCompraDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{myBundle.Create}" onclick="document.getElementById('OrdenesDeCompraListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{myBundle.View}" onclick="document.getElementById('OrdenesDeCompraListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{myBundle.Edit}" onclick="document.getElementById('OrdenesDeCompraListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{myBundle.Delete}" onclick="document.getElementById('OrdenesDeCompraListForm:deleteButton').click();" icon="ui-icon-trash"/>
+                <p:separator/>
+                <p:menuitem value="#{myBundle.OrdenesDeCompraMenuItem_articuloId}" icon="ui-icon-search"  actionListener="#{ordenesDeCompraController.prepareArticuloId}" update=":ArticulosViewForm" oncomplete="PF('ArticulosViewDialog').show()" disabled="#{empty ordenesDeCompraController.selected.articuloId}"/>  
+                <p:menuitem value="#{myBundle.OrdenesDeCompraMenuItem_marcaId}" icon="ui-icon-search"  actionListener="#{ordenesDeCompraController.prepareMarcaId}" update=":MarcasViewForm" oncomplete="PF('MarcasViewDialog').show()" disabled="#{empty ordenesDeCompraController.selected.marcaId}"/>  
+                <p:menuitem value="#{myBundle.OrdenesDeCompraMenuItem_solicitudId}" icon="ui-icon-search"  actionListener="#{ordenesDeCompraController.prepareSolicitudId}" update=":SolicitudesDeArticulosViewForm" oncomplete="PF('SolicitudesDeArticulosViewDialog').show()" disabled="#{empty ordenesDeCompraController.selected.solicitudId}"/>  
+                <p:menuitem value="#{myBundle.OrdenesDeCompraMenuItem_unidadDeMedidaId}" icon="ui-icon-search"  actionListener="#{ordenesDeCompraController.prepareUnidadDeMedidaId}" update=":UnidadesDeMedidaViewForm" oncomplete="PF('UnidadesDeMedidaViewDialog').show()" disabled="#{empty ordenesDeCompraController.selected.unidadDeMedidaId}"/>  
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{ordenesDeCompraController.items}"
+                         lazy="false"
+                         rowKey="#{item.numeroOrden}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{ordenesDeCompraController.selected}"
+                         filteredValue="#{ordenesDeCompraController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{ordenesDeCompraController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.numeroOrden}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:OrdenesDeCompraDataTableContextMenu" listener="#{ordenesDeCompraController.resetParents}"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:OrdenesDeCompraDataTableContextMenu" listener="#{ordenesDeCompraController.resetParents}"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton" listener="#{ordenesDeCompraController.resetParents}"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('OrdenesDeCompraListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.numeroOrden}" filterBy="#{item.numeroOrden}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_numeroOrden}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.numeroOrden}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.fechaOrden}" filterBy="#{item.fechaOrden}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_fechaOrden}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaOrden}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_estado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estado}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.cantidad}" filterBy="#{item.cantidad}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_cantidad}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidad}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.costoUnitario}" filterBy="#{item.costoUnitario}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_costoUnitario}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.costoUnitario}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.articuloId.descripcion}" filterBy="#{item.articuloId.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_articuloId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.articuloId.descripcion}"/>
+                </p:column>
+
+              
+                    <p:column sortBy="#{item.marcaId.descripcion}" filterBy="#{item.marcaId.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_marcaId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.marcaId.descripcion}"/>
+                    </p:column>
+                
+                    <p:column sortBy="#{item.solicitudId.id}" filterBy="#{item.solicitudId.id}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_solicitudId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.solicitudId.id}"/>
+                    </p:column>
+                
+                    <p:column sortBy="#{item.unidadDeMedidaId.descripcion}" filterBy="#{item.unidadDeMedidaId.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="#{myBundle.ListOrdenesDeCompraTitle_unidadDeMedidaId}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.unidadDeMedidaId.descripcion}"/>
+                    </p:column>
+             
+
+            </p:dataTable>
+            
+                        <h3>Exporta los datos visibles en la tabla</h3>
+            <h:commandLink>
+                <p:graphicImage name="/img/Excel.jpg" height="32px" width="32px"/>
+                <p:dataExporter type="xls" target="datalist" fileName="Ordenes De Compra" pageOnly="true"/>
+            </h:commandLink>
+            
+            <h:commandLink>
+                <p:graphicImage name="/img/Pdf.jpg" width="32px" height="32px"/>
+                <p:dataExporter type="pdf" target="datalist" fileName="Ordenes De Compra" pageOnly="true" />
+            </h:commandLink>
+
+          
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{myBundle.Create}" actionListener="#{ordenesDeCompraController.prepareCreate}" update=":OrdenesDeCompraCreateForm" oncomplete="PF('OrdenesDeCompraCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{myBundle.View}" update=":OrdenesDeCompraViewForm" oncomplete="PF('OrdenesDeCompraViewDialog').show()" disabled="#{empty ordenesDeCompraController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{myBundle.Edit}" update=":OrdenesDeCompraEditForm" oncomplete="PF('OrdenesDeCompraEditDialog').show()" disabled="#{empty ordenesDeCompraController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{myBundle.Delete}" actionListener="#{ordenesDeCompraController.delete}" update=":growl,datalist" disabled="#{empty ordenesDeCompraController.selected}">
+                <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

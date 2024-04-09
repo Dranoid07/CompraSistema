@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProveedoresCreateDlg" widgetVar="ProveedoresCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{myBundle.CreateProveedoresTitle}" closeOnEscape="true">
+
+            <h:form id="ProveedoresCreateForm">
+
+                <h:panelGroup id="display" rendered="#{proveedoresController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{myBundle.CreateProveedoresLabel_cedulaRnc}" for="cedulaRnc" />
+                        <p:inputText id="cedulaRnc" value="#{proveedoresController.selected.cedulaRnc}" title="#{myBundle.CreateProveedoresTitle_cedulaRnc}" size="20" maxlength="20" required="true">
+                            <f:validator validatorId="com.jp.RncValidator" />
+                        </p:inputText>
+                        <p:message for="cedulaRnc"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProveedoresLabel_nombreComercial}" for="nombreComercial" />
+                        <p:inputText id="nombreComercial" value="#{proveedoresController.selected.nombreComercial}" title="#{myBundle.CreateProveedoresTitle_nombreComercial}" size="100" maxlength="100" required="true"/>
+
+                        <p:outputLabel value="#{myBundle.CreateProveedoresLabel_estado}" for="estado" />
+                        <p:selectOneRadio id="estado" value="#{proveedoresController.selected.estado}" required="true">
+                            <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        </p:selectOneRadio>
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proveedoresController.saveNew}" value="#{myBundle.Save}" update="display,:ProveedoresListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProveedoresCreateDialog'));">
+                        <p:confirm header="#{myBundle.ConfirmationHeader}" message="#{myBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{myBundle.Cancel}" oncomplete="PF('ProveedoresCreateDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

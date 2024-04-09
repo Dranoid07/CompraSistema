@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="OrdenesDeCompraCreatePage" lazy="true">
+        <pm:header title="#{myBundle.CreateOrdenesDeCompraTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{myBundle.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:OrdenesDeCompraListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="OrdenesDeCompraCreateForm">
+
+                <h:panelGroup id="display" rendered="#{ordenesDeCompraController.selected != null}">
+                    <p:outputPanel>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateOrdenesDeCompraLabel_fechaOrden}" for="fechaOrden" />
+                            <p:calendar id="fechaOrden" pattern="MM/dd/yyyy" value="#{ordenesDeCompraController.selected.fechaOrden}" title="#{myBundle.CreateOrdenesDeCompraTitle_fechaOrden}"  showOn="button"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateOrdenesDeCompraLabel_estado}" for="estado" />
+                            <p:inputText id="estado" value="#{ordenesDeCompraController.selected.estado}" title="#{myBundle.CreateOrdenesDeCompraTitle_estado}" size="20" maxlength="20"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateOrdenesDeCompraLabel_cantidad}" for="cantidad" />
+                            <p:inputText id="cantidad" value="#{ordenesDeCompraController.selected.cantidad}" title="#{myBundle.CreateOrdenesDeCompraTitle_cantidad}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateOrdenesDeCompraLabel_costoUnitario}" for="costoUnitario" />
+                            <p:inputText id="costoUnitario" value="#{ordenesDeCompraController.selected.costoUnitario}" title="#{myBundle.CreateOrdenesDeCompraTitle_costoUnitario}"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateOrdenesDeCompraLabel_articuloId}" for="articuloId" />
+                            <p:selectOneMenu id="articuloId" value="#{ordenesDeCompraController.selected.articuloId}"  converter="articulosConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{articulosController.items}"
+                                               var="articuloIdItem"
+                                               itemValue="#{articuloIdItem}"
+                                               itemLabel="#{articuloIdItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateOrdenesDeCompraLabel_marcaId}" for="marcaId" />
+                            <p:selectOneMenu id="marcaId" value="#{ordenesDeCompraController.selected.marcaId}"  converter="marcasConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{marcasController.items}"
+                                               var="marcaIdItem"
+                                               itemValue="#{marcaIdItem}"
+                                               itemLabel="#{marcaIdItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateOrdenesDeCompraLabel_solicitudId}" for="solicitudId" />
+                            <p:selectOneMenu id="solicitudId" value="#{ordenesDeCompraController.selected.solicitudId}"  converter="solicitudesDeArticulosConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{solicitudesDeArticulosController.items}"
+                                               var="solicitudIdItem"
+                                               itemValue="#{solicitudIdItem}"
+                                               itemLabel="#{solicitudIdItem.id.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{myBundle.CreateOrdenesDeCompraLabel_unidadDeMedidaId}" for="unidadDeMedidaId" />
+                            <p:selectOneMenu id="unidadDeMedidaId" value="#{ordenesDeCompraController.selected.unidadDeMedidaId}"  converter="unidadesDeMedidaConverter">
+                                <f:selectItem itemLabel="#{myBundle.SelectOneMessage}"/>
+                                <f:selectItems value="#{unidadesDeMedidaController.items}"
+                                               var="unidadDeMedidaIdItem"
+                                               itemValue="#{unidadDeMedidaIdItem}"
+                                               itemLabel="#{unidadDeMedidaIdItem.descripcion.toString()}"
+                                               />
+
+                            </p:selectOneMenu>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{ordenesDeCompraController.saveNew}" value="#{myBundle.Save}" update="display,:OrdenesDeCompraListPage:OrdenesDeCompraListForm:datalist,:growl" action="#{mobilePageController.navigateWithHistory('pm:OrdenesDeCompraListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

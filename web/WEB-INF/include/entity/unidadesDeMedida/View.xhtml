@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UnidadesDeMedidaViewDlg" widgetVar="UnidadesDeMedidaViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{myBundle.ViewUnidadesDeMedidaTitle}" closeOnEscape="true">
+
+            <h:form id="UnidadesDeMedidaViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{unidadesDeMedidaController.selected != null}">
+
+                        <h:outputText value="#{myBundle.ViewUnidadesDeMedidaLabel_id}"/>
+                        <h:outputText value="#{unidadesDeMedidaController.selected.id}" title="#{myBundle.ViewUnidadesDeMedidaTitle_id}"/>
+
+                        <h:outputText value="#{myBundle.ViewUnidadesDeMedidaLabel_descripcion}"/>
+                        <h:outputText value="#{unidadesDeMedidaController.selected.descripcion}" title="#{myBundle.ViewUnidadesDeMedidaTitle_descripcion}"/>
+
+                        <h:outputText value="#{myBundle.ViewUnidadesDeMedidaLabel_estado}"/>
+                        <h:outputText value="#{unidadesDeMedidaController.selected.estado}" title="#{myBundle.ViewUnidadesDeMedidaTitle_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{myBundle.Close}" onclick="PF('UnidadesDeMedidaViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
